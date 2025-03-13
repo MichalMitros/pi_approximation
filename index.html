@@ -39,7 +39,7 @@
             let piApprox = 4 * (insideCircle / totalPoints);
             document.getElementById("info").innerText = `π ≈ ${piApprox.toFixed(6)}`;
             if (it < 30000) {
-                it += 0.0005;
+                it += 0.001;
             }
         }
 
