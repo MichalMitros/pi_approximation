@@ -4,21 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>π approximation</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
             font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
             background-color: #f4f4f4;
         }
         #info {
-            margin-top: 10px;
             font-size: 5em;
+            margin-top: 20px;
         }
     </style>
 </head>
@@ -27,22 +22,28 @@
     <script>
         let totalPoints = 0;
         let insideCircle = 0;
+        let it = 1;
 
-        function draw() {
-            for (let i = 0; i < 100; i++) {
-                let x = random(width);
-                let y = random(height);
-                let d = dist(x, y, width / 2, height / 2);
-
-                totalPoints++;
-                if (d < width / 2) {
+        function approximatePi() {
+            for (let i = 0; i < it; i++) {
+                let x = Math.random();
+                let y = Math.random();
+                
+                let distance = Math.sqrt(x * x + y * y);
+                if (distance <= 1) {
                     insideCircle++;
                 }
+                totalPoints++;
             }
-
+            
             let piApprox = 4 * (insideCircle / totalPoints);
             document.getElementById("info").innerText = `π ≈ ${piApprox.toFixed(6)}`;
+            if (it < 30000) {
+                it += 0.0005;
+            }
         }
+
+        setInterval(approximatePi, 100);
     </script>
 </body>
 </html>
